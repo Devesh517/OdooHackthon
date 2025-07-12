@@ -4,75 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="ad.js">
 </head>
+<script>
+    
+  function showSection(id) {
+    
+    document.querySelectorAll('.section').forEach(section => {
+      section.style.display = 'none';
+    });
+    document.getElementById(id).style.display = 'block';
+  }
+  window.onload = function () {
+    showSection('user'); 
+  };
+
+
+  </script>
 <style>
-    .adhead{
+     body {
+        background: linear-gradient(135deg, #1a2a3a, #2d4052);
+        color: #f8f9fa;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+    }
+    .adhead {
         display: flex;
+        align-items: center;
+        padding: 20px;
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    .adhead img{
-     height: 100px;
-     width: 100px;
+    .adhead img {
+        height: 50px;
+        width: 50px;
+        margin-right: 10px;
     }
-    .adnav button{
-    height: 50px;
-    width: 100px;
-    border-style: none;
-    margin-top: 30px;
-    margin-left: 40px;
-    border-radius: 8px;
+    .adnav button {
+        height: 48px;
+        width: 120px;
+        margin: 20px;
+        border: none;
+        border-radius: 6px;
+        background: linear-gradient(145deg, #4169e1, #3a5fcd);
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
     }
-    .user-card {
-  display: flex;
-  align-items: center;
-  background: white;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-
-.user-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #ddd;
-  margin-right: 20px;
-}
-
-.user-details {
-  flex: 1;
-}
-
-.user-actions button {
-  display: block;
-  margin-bottom: 10px;
-  padding: 8px 12px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
+    .adnav button:hover {
+        background: linear-gradient(145deg, #4d74f0, #456bdf);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .user-card, .order-card, .listing-card {
+        display: flex;
+        align-items: center;
+        background: rgba(255,255,255,0.08);
+        padding: 20px;
+        margin: 0 2rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border: 1px solid rgba(255,255,255,0.05);
+        transition: transform 0.3s ease;
+    }
+    .user-card:hover, .order-card:hover, .listing-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+    .user-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        margin-right: 25px;
+        overflow: hidden;
+        border: 2px solid rgba(255,255,255,0.2);
+    }
+    .user-details, .order-info, .listing-info {
+        flex: 1;
+    }
+    .user-actions button, .order-actions button, .listing-actions button {
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .user-actions button:hover, .order-actions button:hover, .listing-actions button:hover {
+        background: #3498db;
+    }
+    .order-actions .approve { background-color: #27ae60; }
+    .order-actions .cancel { background-color: #e74c3c; }
+    .listing-actions .approve { background-color: #27ae60; }
+    .listing-actions .reject { background-color: #e67e22; }
+    .listing-actions .view { background-color: #3498db; }
+    .listing-actions .delete { background-color: #e74c3c; }
 </style>
 <body>
     <div>
         <header class="adhead">
-            <img src="python.png" alt="">
+            <img src="icon.png" alt="">
             <h1>Admin Panel</h1>
         </header>
         <nav class="adnav">
-            <button onclick="showSection('users')">Manage User</button>
+            <button onclick="showSection('user')">Manage User</button>
             <button onclick="showSection('order')">Manage Order</button>
             <button onclick="showSection('list')">Manage Listing</button>
         </nav>
-        <section id="user">
+        <section id="user" class="section">
             <h3>Manage User</h3>
              <div class="user-card">
-      <div class="user-avatar"><img src="usic.png" alt="" style="height: 60px;width: 60px;"></div>
+      <div class="user-avatar"><img src="usic.png" alt="" style="height: 70px;width: 70px;"></div>
       <div class="user-details">
-        <p><strong>Name:</strong> John Doe</p>
-        <p><strong>Email:</strong> john@example.com</p>
+        <p><strong>Name:</strong>Ravi Kumar</p>
         <p><strong>Points:</strong> 120</p>
       </div>
       <div class="user-actions">
@@ -81,9 +133,191 @@
         <button>Delete Points</button>
       </div>
     </div>
+    <div class="user-card">
+      <div class="user-avatar"><img src="usic.png" alt="" style="height: 70px;width: 70px;"></div>
+      <div class="user-details">
+        <p><strong>Name:</strong>Vivek Oberoi</p>
+        <p><strong>Points:</strong> 190</p>
+      </div>
+      <div class="user-actions">
+        <button>View Details</button>
+        <button>Delete User</button>
+        <button>Delete Points</button>
+      </div>
+    </div>
+    <div class="user-card">
+      <div class="user-avatar"><img src="usic.png" alt="" style="height: 70px;width: 70px;"></div>
+      <div class="user-details">
+        <p><strong>Name:</strong>Amit Mathur</p>
+        <p><strong>Points:</strong> 50</p>
+      </div>
+      <div class="user-actions">
+        <button>View Details</button>
+        <button>Delete User</button>
+        <button>Delete Points</button>
+      </div>
+    </div>
                    </section>
-        <section id="order">Manage Order</section>
-        <section id="list">Manage Listing</section>
+        <section id="order" class="section">
+            <div class="order-card">
+    <div class="order-item-img">
+      <img src="cloth.png" alt="item" />
+    </div>
+    <div class="order-info">
+      <p><strong>Order ID:</strong>536</p>
+      <p><strong>Item:</strong> Black Denim Jacket</p>
+      <p><strong>Buyer-Id:</strong>152423</p>
+      <p><strong>Seller-Id:</strong>93733</p>
+      <p><strong>Date:</strong> 12 July 2025</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+    <div class="order-actions">
+      <button class="view">View</button>
+      <button class="approve">Approve</button>
+      <button class="cancel">Cancel</button>
+    </div>
+  </div>
+  <div class="order-card">
+    <div class="order-item-img">
+      <img src="cloth.png" alt="item" />
+    </div>
+    <div class="order-info">
+      <p><strong>Order ID:</strong>536</p>
+      <p><strong>Item:</strong> Black Denim Jacket</p>
+      <p><strong>Buyer-Id:</strong>152423</p>
+      <p><strong>Seller-Id:</strong>93733</p>
+      <p><strong>Date:</strong> 12 July 2025</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+    <div class="order-actions">
+      <button class="view">View</button>
+      <button class="approve">Approve</button>
+      <button class="cancel">Cancel</button>
+    </div>
+  </div>
+  <div class="order-card">
+    <div class="order-item-img">
+      <img src="cloth.png" alt="item" />
+    </div>
+    <div class="order-info">
+      <p><strong>Order ID:</strong>536</p>
+      <p><strong>Item:</strong> Black Denim Jacket</p>
+      <p><strong>Buyer-Id:</strong>152423</p>
+      <p><strong>Seller-Id:</strong>93733</p>
+      <p><strong>Date:</strong> 12 July 2025</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+    <div class="order-actions">
+      <button class="view">View</button>
+      <button class="approve">Approve</button>
+      <button class="cancel">Cancel</button>
+    </div>
+  </div>
+        </section>
+        <section id="list" class="section">
+            <div class="listing-panel">
+  <h2>Manage Listings</h2>
+
+  <div class="listing-card">
+    <img src="shirt.jpg" alt="item" class="listing-image" />
+
+    <div class="listing-info">
+      <h3>Blue Casual Shirt</h3>
+      <p><strong>Category:</strong> Men's Wear</p>
+      <p><strong>Size:</strong> M</p>
+      <p><strong>Condition:</strong> Good</p>
+      <p><strong>Description:</strong> Lightly worn, great for casual use.</p>
+      <p><strong>Posted by:</strong> user123</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+
+    <div class="listing-actions">
+      <button class="approve">Approve</button>
+      <button class="reject">Reject</button>
+      <button class="view">View</button>
+      <button class="delete">Delete</button>
+    </div>
+  </div>
+</div>
+<div class="listing-panel">
+  <h2>Manage Listings</h2>
+
+  <div class="listing-card">
+    <img src="shirt.jpg" alt="item" class="listing-image" />
+
+    <div class="listing-info">
+      <h3>Blue Casual Shirt</h3>
+      <p><strong>Category:</strong> Men's Wear</p>
+      <p><strong>Size:</strong> M</p>
+      <p><strong>Condition:</strong> Good</p>
+      <p><strong>Description:</strong> Lightly worn, great for casual use.</p>
+      <p><strong>Posted by:</strong> user123</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+
+    <div class="listing-actions">
+      <button class="approve">Approve</button>
+      <button class="reject">Reject</button>
+      <button class="view">View</button>
+      <button class="delete">Delete</button>
+    </div>
+  </div>
+
+  
+</div>
+<div class="listing-panel">
+  <h2>Manage Listings</h2>
+
+  <div class="listing-card">
+    <img src="shirt.jpg" alt="item" class="listing-image" />
+
+    <div class="listing-info">
+      <h3>Blue Casual Shirt</h3>
+      <p><strong>Category:</strong> Men's Wear</p>
+      <p><strong>Size:</strong> M</p>
+      <p><strong>Condition:</strong> Good</p>
+      <p><strong>Description:</strong> Lightly worn, great for casual use.</p>
+      <p><strong>Posted by:</strong> user123</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+
+    <div class="listing-actions">
+      <button class="approve">Approve</button>
+      <button class="reject">Reject</button>
+      <button class="view">View</button>
+      <button class="delete">Delete</button>
+    </div>
+  </div>
+
+  
+</div>
+<div class="listing-panel">
+  <h2>Manage Listings</h2>
+
+  <div class="listing-card">
+    <img src="shirt.jpg" alt="item" class="listing-image" />
+
+    <div class="listing-info">
+      <h3>Blue Casual Shirt</h3>
+      <p><strong>Category:</strong> Men's Wear</p>
+      <p><strong>Size:</strong> M</p>
+      <p><strong>Condition:</strong> Good</p>
+      <p><strong>Description:</strong> Lightly worn, great for casual use.</p>
+      <p><strong>Posted by:</strong> user123</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+
+    <div class="listing-actions">
+      <button class="approve">Approve</button>
+      <button class="reject">Reject</button>
+      <button class="view">View</button>
+      <button class="delete">Delete</button>
+    </div>
+  </div>
+
+  
+</div>
+        </section>
     </div>
 </body>
 </html>
