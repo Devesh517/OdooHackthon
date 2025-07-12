@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landing Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1f1f2e, #121212);
+      color: #fff;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+      .slider {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.slides {
+  display: flex;
+  width: 300%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  width: 100%;
+  height: 200px;
+  display: none;
+  object-fit: cover;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slider-nav {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #4db8ff;
+}
+
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      padding-left: 5px;
+      border-left: 4px solid #4db8ff;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .category {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      height: 220px;
+      padding: 15px;
+      transition: transform 0.3s ease;
+      margin: 30px;
+    }
+
+    .product:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .search-bar {
+        margin-top: 10px;
+        margin-left: 0;
+        width: 100%;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <header>
+      <div class="logo">ReWear</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search for clothes or categories...">
+      </div>
+    </header>
+    
+<div class="slider">
+  <div class="slides">
+    <img src="slide1.jpg" alt="Slide 1" class="slide active">
+    <img src="slide2.jpg" alt="Slide 2" class="slide">
+    <img src="slide3.jpg" alt="Slide 3" class="slide">
+  </div>
+  <div class="slider-nav">
+    <span class="dot active" onclick="showSlide(0)"></span>
+    <span class="dot" onclick="showSlide(1)"></span>
+    <span class="dot" onclick="showSlide(2)"></span>
+  </div>
+</div>
+
+    <div class="section-title">Categories Section</div>
+    <div class="categories">
+      <div class="category">Men's Wear</div>
+      <div class="category">Women's Wear</div>
+      <div class="category">Kids</div>
+      <div class="category">Accessories</div>
+      <div class="category">Winter</div>
+      <div class="category">Summer</div>
+    </div>
+
+    <!-- Product Listings -->
+    <div class="section-title">Product Listings</div>
+    <div class="product">
+  <img src="shirt.jpg" alt="Product" style="width:100%; border-radius: 8px;">
+  <h4 style="margin-top: 10px;">Blue Denim Shirt</h4>
+  <p>Size: M | Condition: Good</p>
+  <p><strong>Points:</strong> 50</p>
+  <button style="margin-top: 8px; padding: 6px 12px; background: #27ae60; border: none; border-radius: 6px; color: #fff; cursor: pointer;">View</button>
+</div>
+
+<div class="product">
+  <img src="kurti.jpg" alt="Product" style="width:100%; border-radius: 8px;">
+  <h4 style="margin-top: 10px;">Floral Kurti</h4>
+  <p>Size: L | Condition: Like New</p>
+  <p><strong>Points:</strong> 40</p>
+  <button style="margin-top: 8px; padding: 6px 12px; background: #27ae60; border: none; border-radius: 6px; color: #fff; cursor: pointer;">View</button>
+</div>
+
+<div class="product">
+  <img src="jeans.jpg" alt="Product" style="width:100%; border-radius: 8px;">
+  <h4 style="margin-top: 10px;">Black Jeans</h4>
+  <p>Size: 32 | Condition: Used</p>
+  <p><strong>Points:</strong> 35</p>
+  <button style="margin-top: 8px; padding: 6px 12px; background: #27ae60; border: none; border-radius: 6px; color: #fff; cursor: pointer;">View</button>
+</div>
+
+<div class="product">
+  <img src="hoodie.jpg" alt="Product" style="width:100%; border-radius: 8px;">
+  <h4 style="margin-top: 10px;">Winter Hoodie</h4>
+  <p>Size: XL | Condition: Excellent</p>
+  <p><strong>Points:</strong> 60</p>
+  <button style="margin-top: 8px; padding: 6px 12px; background: #27ae60; border: none; border-radius: 6px; color: #fff; cursor: pointer;">View</button>
+</div>
+
+  </div>
+  <script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+      dots[i].classList.remove("active");
+    });
+    slides[index].classList.add("active");
+    dots[index].classList.add("active");
+    currentSlide = index;
+  }
+
+  function autoSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  setInterval(autoSlide, 4000);
+</script>
+
+</body>
+</html>
