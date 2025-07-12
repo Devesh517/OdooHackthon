@@ -29,10 +29,13 @@
             <h1>Admin Panel</h1>
         </header>
         <nav class="adnav">
-            <button>Manage User</button>
-            <button>Manage Order</button>
-            <button>Manage Listing</button>
+            <button onclick="showSection('users')">Manage User</button>
+            <button onclick="showSection('order')">Manage Order</button>
+            <button onclick="showSection('list')">Manage Listing</button>
         </nav>
+        <section id="user">Manage User</section>
+        <section id="order">Manage Order</section>
+        <section id="list">Manage Listing</section>
     </div>
 </body>
 </html>
