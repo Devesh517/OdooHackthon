@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #121212);
+      color: #fff;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .dashboard {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      padding: 16px 24px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .screen-tag {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .profile-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      background: #333;
+      border-radius: 50%;
+      border: 3px solid #444;
+      flex-shrink: 0;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 0.80rem;
+      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.05);
+    }
+
+    .bio-box {
+      margin-top: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .section h3 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      border-left: 5px solid #4db8ff;
+      padding-left: 10px;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .item {
+      background: rgba(255, 255, 255, 0.08);
+      height: 160px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.03);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .profile-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-pic {
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard">
+    <header>
+        <img src="icon.png" alt="" style="width: 50px; height: 50px;">
+      <div class="logo">ReWear</div>
+
+    </header>
+
+    <div class="profile-section">
+      <div class="profile-pic">
+        <img src="profile pic.jpg" alt="" style="width: 120px; height: 120px; border-radius: 50%;">
+      </div>
+      <div class="info">
+        <div class="info-grid">
+             <div class="info-box">ID : 29430</div>
+              <div class="info-box">Name : Ravi Dhanwani</div>
+          <div class="info-box">Email: ravidhanwani134@gmail.com</div>
+          <div class="info-box">Points: 200</div>
+          <div class="info-box">Location: Delhi</div>
+          <div class="info-box">Phone: 9876543210</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+  <h3>My Listings</h3>
+
+  <div class="listing-card" style="display: flex; gap: 20px; background:
+   rgba(255,255,255,0.08); padding: 20px; margin-bottom: 20px; border-radius: 12px;">
+    <img src="shirt.jpg" alt="Red Cotton Shirt" style="width: 120px; height: 120px; 
+    border-radius: 8px; object-fit: cover;">
+    <div class="listing-info" style="flex: 1;">
+      <h3 style="margin-bottom: 8px;">Red Cotton Shirt</h3>
+      <p><strong>Category:</strong> Men's Wear</p>
+      <p><strong>Size:</strong> L</p>
+      <p><strong>Condition:</strong> Like New</p>
+      <p><strong>Description:</strong> Barely worn, soft cotton fabric.</p>
+      <p><strong>Status:</strong> Approved</p>
+    </div>
+    <div class="listing-actions" style="display: flex; flex-direction: column; gap: 8px;">
+      <button style="padding: 8px 12px; border: none; 
+      background-color: #3498db; color: #fff; border-radius: 6px; cursor: pointer;">View</button>
+      <button style="padding: 8px 12px; border: none; background-color: #e74c3c; 
+      color: #fff; border-radius: 6px; cursor: pointer;">Delete</button>
+      <button style="padding: 8px 12px; border: none; background-color: #f39c12; 
+      color: #fff; border-radius: 6px; cursor: pointer;">Edit</button>
+    </div>
+  </div>
+
+  <div class="listing-card" style="display: flex; gap: 20px; background:
+   rgba(255,255,255,0.08); padding: 20px; border-radius: 12px;">
+    <img src="jeans.jpg" alt="Blue Jeans" style="width: 120px; height: 120px; 
+    border-radius: 8px; object-fit: cover;">
+    <div class="listing-info" style="flex: 1;">
+      <h3 style="margin-bottom: 8px;">Blue Jeans</h3>
+      <p><strong>Category:</strong> Men's Wear</p>
+      <p><strong>Size:</strong> 32</p>
+      <p><strong>Condition:</strong> Good</p>
+      <p><strong>Description:</strong> Slightly faded but durable.</p>
+      <p><strong>Status:</strong> Pending</p>
+    </div>
+    <div class="listing-actions" style="display: flex; flex-direction: column; gap: 8px;">
+      <button style="padding: 8px 12px; border: none; background-color: #3498db; 
+      color: #fff; border-radius: 6px; cursor: pointer;">View</button>
+      <button style="padding: 8px 12px; border: none; background-color: #e74c3c; 
+      color: #fff; border-radius: 6px; cursor: pointer;">Delete</button>
+      <button style="padding: 8px 12px; border: none; background-color: #f39c12; 
+      color: #fff; border-radius: 6px; cursor: pointer;">Edit</button>
+    </div>
+  </div>
+</div>
+
+    <div class="section">
+      <h3>My Purchases</h3>
+      <div class="item-grid">
+        <div class="item">
+            <p><strong>Item:</strong> Denim Jacket</p>
+      <p><strong>Seller-Id:</strong>23411</p>
+      <p><strong>Price:</strong> ₹499</p>
+      <button style="margin-top: 10px; padding: 8px 12px; border: none; border-radius: 6px; background-color: #27ae60; color: #fff; cursor: pointer;">Confirm</button>
+        </div>
+        <div class="item">
+            <p ><strong>Item:</strong>Cotton Kurti</p>
+      <p><strong>Seller-Id:</strong>13452</p>
+      <p><strong>Price:</strong> ₹399</p>
+      <button style="margin-top: 10px; padding: 8px 12px; border: none; border-radius: 6px; 
+      background-color: #27ae60; color: #fff; cursor: pointer;">Confirm</button>
+        </div>
+        <div class="item">
+            <p><strong>Item:</strong>Cotton Shirt</p>
+      <p><strong>Seller:</strong>24122</p>
+      <p><strong>Price:</strong> ₹600</p>
+      <button style="margin-top: 10px; padding: 8px 12px; border: none; border-radius: 6px;
+       background-color: #27ae60; color: #fff; cursor: pointer;">Confirm</button>
+        </div>
+        <div class="item">
+            <p><strong>Item:</strong>Red T-shirt</p>
+      <p><strong>Seller:</strong>53762</p>
+      <p><strong>Price:</strong> ₹109</p>
+      <button style="margin-top: 10px; padding: 8px 12px; border: none; border-radius: 6px; 
+      background-color: #27ae60; color: #fff; cursor: pointer;">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
