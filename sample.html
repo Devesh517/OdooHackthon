@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .admin-panel {
+  padding: 20px;
+  background: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-nav button {
+  padding: 10px 20px;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.admin-nav .active {
+  background: #333;
+  color: white;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ddd;
+  margin-right: 20px;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-actions button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+</style>
+<body>
+    <!-- Admin Panel -->
+<div class="admin-panel">
+  <header>
+    <h1>Admin Panel</h1>
+  </header>
+
+  <nav class="admin-nav">
+    <button class="active">Manage Users</button>
+    <button>Manage Orders</button>
+    <button>Manage Listings</button>
+  </nav>
+
+  <section class="user-management">
+    <h2>Manage Users</h2>
+
+    <div class="user-card">
+      <div class="user-avatar"></div>
+      <div class="user-details">
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Email:</strong> john@example.com</p>
+        <p><strong>Points:</strong> 120</p>
+      </div>
+      <div class="user-actions">
+        <button>View</button>
+        <button>Delete</button>
+      </div>
+    </div>
+
+    <!-- Repeat .user-card for each user -->
+
+  </section>
+</div>
+
+</body>
+</html>
