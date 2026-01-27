@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReWear | Products</title>
+  <link rel="stylesheet" href="../CSS/common.css">
+  <link rel="stylesheet" href="../CSS/product.css">
+</head>
+<body>
+  <!-- Product Header -->
+  <header class="product-header">
+    <h1>Available Products</h1>
+    <p>Discover sustainable fashion and earn points with every exchange</p>
+  </header>
+
+  <!-- Search and Filter Section -->
+  <section class="search-filter-section">
+    <div class="search-bar">
+      <input type="text" class="search-input" placeholder="Search for products..." id="searchInput">
+      <button class="search-btn" onclick="searchProducts()">Search</button>
+    </div>
+
+    <div class="sort-section">
+      <label class="sort-label">Sort by:</label>
+      <select class="sort-select" id="sortSelect" onchange="sortProducts()">
+        <option value="newest">Newest First</option>
+        <option value="points-high">Points: High to Low</option>
+        <option value="points-low">Points: Low to High</option>
+        <option value="name">Name: A to Z</option>
+      </select>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all" onclick="filterProducts(this, 'all')">All</button>
+      <button class="filter-btn" data-filter="men" onclick="filterProducts(this, 'men')">Men</button>
+      <button class="filter-btn" data-filter="women" onclick="filterProducts(this, 'women')">Women</button>
+      <button class="filter-btn" data-filter="kids" onclick="filterProducts(this, 'kids')">Kids</button>
+      <button class="filter-btn" data-filter="accessories" onclick="filterProducts(this, 'accessories')">Accessories</button>
+      <button class="filter-btn" data-filter="winter" onclick="filterProducts(this, 'winter')">Winter</button>
+      <button class="filter-btn" data-filter="summer" onclick="filterProducts(this, 'summer')">Summer</button>
+    </div>
+  </section>
+
+  <!-- Loading Spinner -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div>Loading products...</div>
+  </div>
+
+  <!-- Product Grid -->
+  <section id="product-grid" class="product-grid">
+    <!-- Products will be populated here -->
+  </section>
+
+  <!-- No Products Message -->
+  <div class="no-products" id="noProducts" style="display: none;">
+    <h3>No Products Found</h3>
+    <p>Try adjusting your filters or search terms</p>
+  </div>
+
+  <!-- Load More -->
+  <div class="load-more-section">
+    <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreProducts()">
+      Load More Products
+    </button>
+  </div>
+
+  <script src="../JS/product.js"></script>
+  <script src="../JS/common.js"></script>
+</body>
+</html>

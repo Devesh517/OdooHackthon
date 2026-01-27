@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ReWear</title>
+    <link rel="stylesheet" href="../CSS/common.css">
+    <link rel="stylesheet" href="../CSS/login.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="login-container">
+            <div class="logo-section">
+                <img src="../Images/icon.png" alt="ReWear" class="logo-icon">
+                <span class="logo-text">ReWear</span>
+            </div>
+            
+            <h2>Welcome Back</h2>
+            
+            <form id="loginForm" novalidate>
+                <div class="form-group" id="usernameGroup">
+                    <label for="username">Username or Email</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+                
+                <div class="form-group" id="passwordGroup">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                
+                <button type="submit" class="login-button" id="loginButton">
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="forgot-password">
+                <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+            </div>
+            
+            <div class="signup-link">
+                Don't have an account? <a href="newusr.html">Sign up here</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JS/common.js"></script>
+    <script src="../JS/login.js"></script>
+</body>
+</html>

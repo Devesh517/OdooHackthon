@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ReWear</title>
+    <link rel="stylesheet" href="../CSS/common.css">
+    <link rel="stylesheet" href="../CSS/newusr.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="signup-container">
+            <div class="logo-section">
+                <img src="../Images/icon.png" alt="ReWear" class="logo-icon">
+                <span class="logo-text">ReWear</span>
+            </div>
+            
+            <h2>Join ReWear</h2>
+            
+            <form id="signupForm" novalidate>
+                <div class="form-group" id="fullNameGroup">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    <div class="error-message" id="fullNameError"></div>
+                </div>
+                
+                <div class="form-group" id="emailGroup">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                
+                <div class="form-group" id="usernameGroup">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+                
+                <div class="form-group" id="passwordGroup">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                
+                <div class="form-group" id="confirmPasswordGroup">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                    <button type="button" class="password-toggle" onclick="toggleConfirmPassword()">👁️</button>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+                
+                <div class="form-group" id="phoneGroup">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    <div class="error-message" id="phoneError"></div>
+                </div>
+                
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">
+                        I agree to the <a href="#" onclick="showTerms()">Terms of Service</a> and <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="signup-button" id="signupButton">
+                    Create Account
+                </button>
+            </form>
+            
+            <div class="login-link">
+                Already have an account? <a href="login.html">Sign in here</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JS/common.js"></script>
+    <script src="../JS/newusr.js"></script>
+</body>
+</html>

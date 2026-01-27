@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - ReWear</title>
+    <link rel="stylesheet" href="../CSS/common.css">
+    <link rel="stylesheet" href="../CSS/admin.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="admin-container">
+            <div class="adhead">
+                <img src="../Images/icon.png" alt="ReWear">
+                <h1>Admin Panel</h1>
+            </div>
+
+            <div class="adnav">
+                <button onclick="showSection('dashboard')" class="active">Dashboard</button>
+                <button onclick="showSection('users')">Users</button>
+                <button onclick="showSection('listings')">Listings</button>
+                <button onclick="showSection('reports')">Reports</button>
+                <button onclick="showSection('settings')">Settings</button>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="section active">
+                <h3>Dashboard Overview</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-number">1,234</div>
+                        <div class="stat-label">Total Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👕</div>
+                        <div class="stat-number">567</div>
+                        <div class="stat-label">Active Listings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔄</div>
+                        <div class="stat-number">89</div>
+                        <div class="stat-label">Pending Approvals</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-number">2,345</div>
+                        <div class="stat-label">Total Trades</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div id="users" class="section">
+                <h3>User Management</h3>
+                <div class="data-table">
+                    <div class="table-header">Recent Users</div>
+                    <div class="table-content" id="usersTable">
+                        <!-- Users will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listings Section -->
+            <div id="listings" class="section">
+                <h3>Listing Management</h3>
+                <div class="data-table">
+                    <div class="table-header">Pending Approvals</div>
+                    <div class="table-content" id="listingsTable">
+                        <!-- Listings will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports" class="section">
+                <h3>Reports & Analytics</h3>
+                <div class="empty-state">
+                    <div class="empty-state-icon">📊</div>
+                    <div class="empty-state-title">Reports Coming Soon</div>
+                    <div class="empty-state-text">Detailed analytics and reporting features will be available soon.</div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="section">
+                <h3>Admin Settings</h3>
+                <div class="empty-state">
+                    <div class="empty-state-icon">⚙️</div>
+                    <div class="empty-state-title">Settings Panel</div>
+                    <div class="empty-state-text">Admin configuration options will be available here.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JS/common.js"></script>
+    <script src="../JS/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ReWear - Sustainable Fashion Platform</title>
+  <link rel="stylesheet" href="../CSS/common.css">
+  <link rel="stylesheet" href="../CSS/landing.css">
+</head>
+<body>
+  <div class="main-content">
+    <div class="slider" id="slider">
+      <div class="slides" id="slides">
+        <div class="slide">
+          <div class="slide-content">
+            <div class="slide-title">Sustainable Fashion</div>
+            <div class="slide-subtitle">Give clothes a second life</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-content">
+            <div class="slide-title">Earn Points</div>
+            <div class="slide-subtitle">Trade and earn rewards</div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-content">
+            <div class="slide-title">Join Community</div>
+            <div class="slide-subtitle">Connect with fashion lovers</div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="slider-arrow prev" onclick="changeSlide(-1)">‹</button>
+      <button class="slider-arrow next" onclick="changeSlide(1)">›</button>
+      
+      <div class="slider-nav">
+        <span class="dot active" onclick="showSlide(0)"></span>
+        <span class="dot" onclick="showSlide(1)"></span>
+        <span class="dot" onclick="showSlide(2)"></span>
+      </div>
+    </div>
+
+    <div class="section-title">Categories</div>
+    <div class="categories" id="categories">
+      <div class="category" onclick="selectCategory('mens')">
+        <span class="category-icon">👔</span>
+        <div class="category-name">Men's Wear</div>
+      </div>
+      <div class="category" onclick="selectCategory('womens')">
+        <span class="category-icon">👗</span>
+        <div class="category-name">Women's Wear</div>
+      </div>
+      <div class="category" onclick="selectCategory('kids')">
+        <span class="category-icon">👶</span>
+        <div class="category-name">Kids</div>
+      </div>
+      <div class="category" onclick="selectCategory('accessories')">
+        <span class="category-icon">👜</span>
+        <div class="category-name">Accessories</div>
+      </div>
+      <div class="category" onclick="selectCategory('winter')">
+        <span class="category-icon">❄️</span>
+        <div class="category-name">Winter</div>
+      </div>
+      <div class="category" onclick="selectCategory('summer')">
+        <span class="category-icon">☀️</span>
+        <div class="category-name">Summer</div>
+      </div>
+    </div>
+
+    <!-- Selected Category Section -->
+    <div class="selected-category-section" id="selectedCategorySection" style="display: none;">
+      <div class="category-header">
+        <h2 id="selectedCategoryTitle">Category Name</h2>
+        <button class="back-btn" onclick="goBackToAllCategories()">← Back to All Categories</button>
+      </div>
+      
+      <div class="subcategories-grid" id="subcategoriesGrid">
+        <!-- Subcategories will be populated by JavaScript -->
+      </div>
+      
+      <div class="category-products" id="categoryProducts">
+        <!-- Products for selected category will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <div>Loading products...</div>
+    </div>
+
+    <div class="section-title">Featured Products</div>
+    <div class="products" id="products">
+      <!-- Products will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <script src="../JS/common.js"></script>
+  <script src="../JS/landing.js"></script>
+</body>
+</html>

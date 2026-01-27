@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Dashboard - ReWear</title>
+  <link rel="stylesheet" href="../CSS/common.css">
+  <link rel="stylesheet" href="../CSS/user.css">
+</head>
+<body>
+  <div class="main-content">
+    <div class="profile-section">
+      <div class="profile-pic">
+        <img src="../Images/profile pic.jpg" alt="Profile Picture">
+      </div>
+      
+      <div class="info">
+        <div class="info-grid">
+          <div class="info-box">
+            <strong>Name:</strong> John Doe
+          </div>
+          <div class="info-box">
+            <strong>Email:</strong> john.doe@example.com
+          </div>
+          <div class="info-box">
+            <strong>Phone:</strong> +1 (555) 123-4567
+          </div>
+          <div class="info-box">
+            <strong>Location:</strong> New York, NY
+          </div>
+          <div class="info-box">
+            <strong>Member Since:</strong> January 2024
+          </div>
+          <div class="info-box">
+            <strong>Total Points:</strong> 1,250
+          </div>
+        </div>
+        <div class="bio-box">
+          <strong>Bio:</strong> Fashion enthusiast and sustainability advocate. Love giving clothes a second life and connecting with like-minded people in the ReWear community.
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👕</div>
+        <div class="stat-number">12</div>
+        <div class="stat-label">Items Listed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔄</div>
+        <div class="stat-number">8</div>
+        <div class="stat-label">Successful Trades</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-number">4.8</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-number">Gold</div>
+        <div class="stat-label">Member Level</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h3>My Listings</h3>
+        <button class="btn btn-primary" onclick="addNewListing()">+ Add New Listing</button>
+      </div>
+
+      <div class="listings-stats">
+        <div class="stat-box">
+          <span class="stat-label">Total Listed</span>
+          <span class="stat-value" id="totalListings">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Active</span>
+          <span class="stat-value" id="activeListings">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Traded</span>
+          <span class="stat-value" id="tradedListings">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Total Points</span>
+          <span class="stat-value" id="listingPoints">0</span>
+        </div>
+      </div>
+
+      <div class="listings-filter">
+        <button class="filter-btn active" onclick="filterListings('all', this)">All</button>
+        <button class="filter-btn" onclick="filterListings('active', this)">Active</button>
+        <button class="filter-btn" onclick="filterListings('traded', this)">Traded</button>
+      </div>
+
+      <div id="listingsContainer">
+        <!-- Listings will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Recent Activity</h3>
+      <div id="activityContainer">
+        <!-- Activity will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script src="../JS/common.js"></script>
+  <script src="../JS/user.js"></script>
+</body>
+</html>

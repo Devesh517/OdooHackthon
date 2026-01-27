@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details - ReWear</title>
+  <link rel="stylesheet" href="../CSS/common.css">
+  <link rel="stylesheet" href="../CSS/prdctdetail.css">
+</head>
+<body>
+  <div class="main-content">
+    <!-- Product Info Section (for viewing existing products) -->
+    <div class="product-info" id="productInfo" style="display: none;">
+      <div class="product-header">
+        <img src="" alt="Product" class="product-image" id="productImage">
+        <div>
+          <div class="product-title" id="productTitle">Product Title</div>
+          <div class="product-meta" id="productMeta">Posted by User • Date</div>
+        </div>
+      </div>
+      
+      <div class="product-details" id="productDetails">
+        <!-- Product details will be populated by JavaScript -->
+      </div>
+      
+      <div class="product-description" id="productDescription">
+        Product description will appear here.
+      </div>
+      
+      <div class="action-buttons">
+        <button class="action-btn trade-btn" onclick="initiateTrade()">Initiate Trade</button>
+        <button class="action-btn contact-btn" onclick="contactSeller()">Contact Seller</button>
+      </div>
+    </div>
+
+    <!-- Upload/Edit Section -->
+    <div class="main-section" id="uploadSection">
+      <div class="upload-box" onclick="triggerFileUpload()">
+        <input type="file" id="imageUpload" class="upload-input" accept="image/*" onchange="handleImageUpload(event)">
+        <div class="upload-icon" id="uploadIcon">📷</div>
+        <div class="upload-text" id="uploadText">Click to upload image</div>
+        <div class="upload-subtext">or drag and drop</div>
+        <img id="previewImage" class="preview-image" style="display: none;">
+      </div>
+      
+      <div class="desc-box">
+        <h3>Product Details</h3>
+        <form id="productForm">
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" name="productName" placeholder="Enter product name" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category" name="category" required>
+                <option value="">Select category</option>
+                <option value="mens">Men's Wear</option>
+                <option value="womens">Women's Wear</option>
+                <option value="kids">Kids</option>
+                <option value="accessories">Accessories</option>
+                <option value="winter">Winter</option>
+                <option value="summer">Summer</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="size">Size</label>
+              <select id="size" name="size" required>
+                <option value="">Select size</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+                <option value="32">32</option>
+                <option value="34">34</option>
+                <option value="36">36</option>
+                <option value="38">38</option>
+                <option value="40">40</option>
+                <option value="42">42</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="condition">Condition</label>
+              <select id="condition" name="condition" required>
+                <option value="">Select condition</option>
+                <option value="New">New</option>
+                <option value="Like New">Like New</option>
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Used">Used</option>
+                <option value="Fair">Fair</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="points">Points Value</label>
+              <input type="number" id="points" name="points" placeholder="Enter points value" min="1" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Describe your product..." required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn" id="submitBtn">
+            Submit Listing
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../JS/common.js"></script>
+  <script src="../JS/prdctdetail.js"></script>
+</body>
+</html>
+
