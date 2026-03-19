@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 *Hackathon Project – Odoo Hackathon 2025*  
 
-> A **web-based platform** designed to promote **sustainable fashion** by enabling users to **exchange, swap, and donate unused clothes** within a community.  
+> A **web-based platform** designed to promote **sustainable fashion** by enabling users to **exchange and swap unused clothes** within a community.  
 > Currently, the **frontend** is developed, and the **backend integration** will be added soon.  
 
 ---
