@@ -513,10 +513,10 @@ body {
     display: inline-block;
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    /* background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); */
     color: white;
     text-align: center;
-    line-height: 40px;
+    line-height: 45px;
     border-radius: 50%;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
@@ -533,6 +533,11 @@ body {
     padding-top: 20px;
     border-top: 1px solid rgba(52, 152, 219, 0.2);
     color: #7f8c8d;
+}
+
+.social-links a img {
+    width: 20px;
+    height: 20px;
 }
 
 /* Toast Notifications */
@@ -567,7 +572,6 @@ body {
 .toast.warning {
     border-left: 4px solid #f39c12;
 }
-
 /* Loading Overlay */
 .loading-overlay {
     position: fixed;
@@ -581,7 +585,6 @@ body {
     align-items: center;
     z-index: 9999;
 }
-
 .loading-spinner {
     width: 50px;
     height: 50px;

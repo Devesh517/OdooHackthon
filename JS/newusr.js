@@ -295,11 +295,8 @@ function toggleConfirmPassword() {
         button.textContent = '👁️';
     }
 }
-
-// Submit signup
-function submitSignup() {
+async function submitSignup() {
     isSubmitting = true;
-    
     const formData = {
         fullName: document.getElementById('fullName').value,
         email: document.getElementById('email').value,
@@ -307,29 +304,29 @@ function submitSignup() {
         password: document.getElementById('password').value,
         phone: document.getElementById('phone').value
     };
-    
-    // Show loading state
     signupButton.classList.add('loading');
     signupButton.disabled = true;
-    showLoading();
-    
-    // Simulate API call
-    setTimeout(() => {
-        // Success
-        showToast('Account created successfully! Redirecting to login...', 'success');
-        
-        // Redirect to login page
-        setTimeout(() => {
-            window.location.href = 'login.html';
-        }, 2000);
-        
-        // Hide loading state
-        signupButton.classList.remove('loading');
-        signupButton.disabled = false;
-        hideLoading();
-        
-        isSubmitting = false;
-    }, 2000);
+    try {
+        const response = await fetch("http://localhost:8080/api/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+        if (response.ok) {
+            showToast("Signup successful!", "success");
+            window.location.href = "login.html";
+        } else {
+            showToast("Signup failed", "error");
+        }
+    } catch (error) {
+        console.log(error);
+        showToast("Server error", "error");
+    }
+    signupButton.classList.remove('loading');
+    signupButton.disabled = false;
+    isSubmitting = false;
 }
 
 // Show terms and privacy

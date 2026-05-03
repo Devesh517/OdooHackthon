@@ -1,10 +1,15 @@
  // DOM Elements
- const slider = document.getElementById('slider');
- const slides = document.querySelectorAll('.slide');
- const dots = document.querySelectorAll('.dot');
- const productsContainer = document.getElementById('products');
- const loading = document.getElementById('loading');
- const categories = document.querySelectorAll('.category');
+  const slider = document.getElementById('slider');
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const grid = document.getElementById('products');
+  const productsContainer = document.getElementById('products');
+  const loading = document.getElementById('loading');
+  const categories = document.querySelectorAll('.category');
+  let currentPage = 0;
+  let productsPerPage = 6;
+  
+  
 
  // Slider variables
  let currentSlide = 0;
@@ -205,28 +210,28 @@ const products = [
     subcategory: 'tshirts'
   }
 ];
-
+let displayedProducts = [...products];
 let filteredProducts = [...products];
 let currentCategory = 'all';
 let currentSubcategory = 'all';
 
  // Initialize the page
- document.addEventListener('DOMContentLoaded', function() {
-   populateProducts();
-   startAutoSlide();
-   setupEventListeners();
- });
+  document.addEventListener('DOMContentLoaded', function() {
+  renderProducts();
+    startAutoSlide();
+    setupEventListeners();
+  });
 
  // Setup event listeners
- function setupEventListeners() {
+  function setupEventListeners() {
    // Keyboard navigation for slider
-   document.addEventListener('keydown', (e) => {
-     if (e.key === 'ArrowLeft') {
-       changeSlide(-1);
-     } else if (e.key === 'ArrowRight') {
-       changeSlide(1);
-     }
-   });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+    } else if (e.key === 'ArrowRight') {
+        changeSlide(1);
+      }
+    });
 
    // Touch/swipe support for slider
   let startX = 0;
@@ -236,72 +241,72 @@ let currentSubcategory = 'all';
     startX = e.touches[0].clientX;
   });
 
-   slider.addEventListener('touchend', (e) => {
-     endX = e.changedTouches[0].clientX;
-     handleSwipe();
-   });
+    slider.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      handleSwipe();
+    });
 
-   function handleSwipe() {
-     const swipeThreshold = 50;
-     const diff = startX - endX;
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = startX - endX;
 
-     if (Math.abs(diff) > swipeThreshold) {
-       if (diff > 0) {
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
          changeSlide(1); // Swipe left
-       } else {
+        } else {
          changeSlide(-1); // Swipe right
-       }
-     }
-   }
- }
+        }
+      }
+    }
+  }
 
  // Slider functions
- function showSlide(index) {
-   slides.forEach((slide, i) => {
-     slide.classList.remove('active');
-     dots[i].classList.remove('active');
-   });
-   
-   slides[index].classList.add('active');
-   dots[index].classList.add('active');
-   currentSlide = index;
-   
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      dots[i].classList.remove('active');
+    });
+  
+  slides[index].classList.add('active');
+  dots[index].classList.add('active');
+  currentSlide = index;
+
    // Update slides transform
-   const slidesContainer = document.getElementById('slides');
+  const slidesContainer = document.getElementById('slides');
    slidesContainer.style.transform = `translateX(-${index * 33.333}%)`;
- }
+  }
 
- function changeSlide(direction) {
-   currentSlide = (currentSlide + direction + slides.length) % slides.length;
-   showSlide(currentSlide);
- }
+  function changeSlide(direction) {
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+    showSlide(currentSlide);
+  }
 
- function startAutoSlide() {
-   slideInterval = setInterval(() => {
-     changeSlide(1);
-   }, 5000);
- }
+  function startAutoSlide() {
+    slideInterval = setInterval(() => {
+      changeSlide(1);
+    }, 5000);
+  }
 
- function stopAutoSlide() {
-   clearInterval(slideInterval);
- }
+  function stopAutoSlide() {
+    clearInterval(slideInterval);
+  }
 
 // Category data with subcategories
 const categoryData = {
   mens: {
     name: "Men's Wear",
-    icon: "👔",
+    icon: "../Images/facebook.png",
     subcategories: [
-      { id: 'shirts', name: 'Shirts', icon: '👕' },
-      { id: 'pants', name: 'Pants', icon: '👖' }
+      { id: 'shirts', name: 'Shirts', icon: '../Images/icons8-mens-hoodie-50.png' },
+      { id: 'pants', name: 'Pants', icon: '../Images/icons8-chrome.gif' }
     ]
   },
   womens: {
     name: "Women's Wear",
     icon: "👗",
     subcategories: [
-      { id: 'dresses', name: 'Dresses', icon: '👗' },
-      { id: 'tops', name: 'Tops', icon: '👚' }
+      { id: 'dresses', name: 'Dresses', icon: '../Images/cloth.png' },
+      { id: 'tops', name: 'Tops', icon: '../Images/facebook.png' }
     ]
   },
   kids: {
@@ -325,7 +330,8 @@ const categoryData = {
     icon: "❄️",
     subcategories: [
       { id: 'jackets', name: 'Jackets', icon: '🧥' },
-      { id: 'sweaters', name: 'Sweaters', icon: '🧶' }
+      { id: 'sweaters', name: 'Sweaters', icon: '🧶'},
+      { id: 'hoodies', name: 'Hoodies', icon: '🧶' }
     ]
   },
   summer: {
@@ -358,7 +364,7 @@ function selectCategory(category) {
   populateCategoryProducts();
   
   // Scroll to the new section
-  document.getElementById('selectedCategorySection').scrollIntoView({ 
+  document.getElementById('selectedCategorySection').scrollIntoView({
     behavior: 'smooth',
     block: 'start'
   });
@@ -366,14 +372,14 @@ function selectCategory(category) {
   showToast(`Showing ${categoryData[category].name}`, 'success');
 }
 
-// Populate subcategories grid
 function populateSubcategories(category) {
   const subcategoriesGrid = document.getElementById('subcategoriesGrid');
   const subcategories = categoryData[category].subcategories;
   
   subcategoriesGrid.innerHTML = subcategories.map(sub => `
     <div class="subcategory-card" onclick="selectSubcategory('${category}', '${sub.id}')">
-      <span class="subcategory-icon">${sub.icon}</span>
+      <img src="${sub.icon}" class="subcategory-icon" alt="${sub.name}"
+            onerror="this.src='../Images/icon.png'">
       <div class="subcategory-name">${sub.name}</div>
     </div>
   `).join('');
@@ -390,7 +396,7 @@ function selectSubcategory(category, subcategory) {
   event.target.closest('.subcategory-card').classList.add('active');
   
   // Filter products by subcategory
-  filteredProducts = products.filter(product => 
+  filteredProducts = products.filter(product =>
     product.category === category && product.subcategory === subcategory
   );
   
@@ -435,7 +441,7 @@ function goBackToAllCategories() {
   
   // Reset to show all products
   filteredProducts = [...products];
-  populateProducts();
+  renderProducts();
   
   // Scroll to categories
   document.getElementById('categories').scrollIntoView({ 
@@ -446,54 +452,70 @@ function goBackToAllCategories() {
   showToast('Showing all categories', 'success');
 }
 
- // Populate products
- function populateProducts() {
-   if (filteredProducts.length === 0) {
-     productsContainer.innerHTML = `
-       <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #7f8c8d;">
-         <div style="font-size: 48px; margin-bottom: 15px;">🔍</div>
-         <div style="font-size: 18px;">No products found</div>
-         <div style="font-size: 14px; margin-top: 10px;">Try adjusting your category filter</div>
-       </div>
-     `;
-     return;
-   }
+ // Populate product
 
-  productsContainer.innerHTML = filteredProducts.map(product => `
-    <div class="product" onclick="viewProduct(${product.id})">
-      <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='../Images/icon.png'">
-      <div class="product-title">${product.name}</div>
-      <div class="product-details">Size: ${product.size} | Condition: ${product.condition}</div>
-      <div class="product-points">Points: ${product.points}</div>
-      <button class="view-btn">View Details</button>
-      </div>
-  `).join('');
+function renderProducts(append = false) {
+  const grid = document.getElementById('products');
+
+  const startIndex = currentPage * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+
+  const productsToShow = displayedProducts.slice(startIndex, endIndex);
+
+  if (!append) {
+    grid.innerHTML = '';
+  }
+
+  productsToShow.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'product';
+    card.innerHTML = `
+  <img src="${product.image}" class="product-image"
+      onclick="viewProduct(${product.id})">
+
+  <div class="product-title">${product.name}</div>
+  <div class="product-details">Size: ${product.size}</div>
+  <div class="product-points">${product.points}</div>
+
+  <button class="view-btn" onclick="viewProduct(${product.id})">
+    View Details
+  </button>
+`;
+    grid.appendChild(card);
+  });
+
+  // Hide button if no more products
+  if (endIndex >= displayedProducts.length) {
+    document.getElementById('loadMoreBtn').style.display = 'none';
+  }
 }
-
+function loadMoreProducts() {
+  currentPage++;
+  renderProducts(true);
+}
  // View product details
- function viewProduct(productId) {
-   const product = products.find(p => p.id === productId);
-   if (product) {
-     showToast(`Opening ${product.name}...`, 'success');
+  function viewProduct(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      showToast(`Opening ${product.name}...`, 'success');
      // Here you would typically navigate to a product detail page
-     setTimeout(() => {
-       window.location.href = `prdctdetail.html?id=${productId}`;
-     }, 1000);
-   }
- }
+      setTimeout(() => {
+        window.location.href = `prdctdetail.html?id=${productId}`;
+      }, 1000);
+    }
+  }
 
  // Pause auto-slide when hovering over slider
- slider.addEventListener('mouseenter', stopAutoSlide);
- slider.addEventListener('mouseleave', startAutoSlide);
+  slider.addEventListener('mouseenter', stopAutoSlide);
+  slider.addEventListener('mouseleave', startAutoSlide);
 
  // Add loading simulation
- function simulateLoading() {
-   loading.style.display = 'block';
-   setTimeout(() => {
-     loading.style.display = 'none';
-     populateProducts();
-   }, 1500);
- }
-
+  function simulateLoading() {
+  loading.style.display = 'block';
+  setTimeout(() => {
+    loading.style.display = 'none';
+    renderProducts(); // ✅ correct
+  }, 1500);
+}
  // Initialize with loading effect
- simulateLoading();
+  simulateLoading();

@@ -90,16 +90,16 @@ function btnsetting() {
     div.className = 'settings hidden';
 
     div.innerHTML = `
-      <div class="settings-box">
+        <div class="settings-box">
         <div class="settings-header">
-          <h3>⚙️ Settings</h3>
-          <button onclick="closesetting()">✕</button>
+        <h3>⚙️ Settings</h3>
+        <button onclick="closesetting()">✕</button>
         </div>
 
         <div class="settings-tabs">
-          <button class="settings-tab-btn active" onclick="showSetting('account', this)">👤 Account</button>
-          <button class="settings-tab-btn" onclick="showSetting('security', this)">🔐 Security</button>
-          <button class="settings-tab-btn" onclick="showSetting('appearance', this)">🌙 Appearance</button>
+            <button class="settings-tab-btn active" onclick="showSetting('account', this)">👤 Account</button>
+            <button class="settings-tab-btn" onclick="showSetting('security', this)">🔐 Security</button>
+            <button class="settings-tab-btn" onclick="showSetting('appearance', this)">🌙 Appearance</button>
         </div>
 
         <div class="settings-content">
@@ -224,10 +224,10 @@ function addFooter() {
                 <h3>About ReWear</h3>
                 <p>ReWear is a sustainable fashion platform that promotes clothing exchange and reduces textile waste. Join our community to give clothes a second life.</p>
                 <div class="social-links">
-                    <a href="#" title="Facebook">📘</a>
-                    <a href="#" title="Twitter">🐦</a>
-                    <a href="#" title="Instagram">📷</a>
-                    <a href="#" title="LinkedIn">💼</a>
+                    <a href="#" title="Facebook"><img src="../Images/icons8-facebook-circled-48.gif" alt="Facebook"></a>
+                    <a href="#" title="Twitter"><img src="../Images/icons8-x-96.png" alt="Twitter"></a>
+                    <a href="#" title="Instagram"><img src="../Images/insta.png" alt="Instagram"></a>
+                    <a href="#" title="LinkedIn"><img src="../Images/linkedin.png" alt="LinkedIn"></a>
                 </div>
             </div>
             
@@ -245,20 +245,19 @@ function addFooter() {
             <div class="footer-section">
                 <h3>Categories</h3>
                 <ul>
-                    <li><a href="#">Men's Wear</a></li>
-                    <li><a href="#">Women's Wear</a></li>
-                    <li><a href="#">Kids Clothing</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li><a href="#">Seasonal</a></li>
+                    <li><a href="../HTML/product.html?category=men">Men's Wear</a></li>
+                    <li><a href="../HTML/product.html?category=women">Women's Wear</a></li>
+                    <li><a href="../HTML/product.html?category=kids">Kids Clothing</a></li>
+                    <li><a href="../HTML/product.html?category=accessories">Accessories</a></li>
+                    <li><a href="../HTML/product.html?category=seasonal">Seasonal</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h3>Contact Info</h3>
-                <p>📍 123 Fashion Street, Style City</p>
-                <p>📧 info@rewear.com</p>
-                <p>📞 +916350537767</p>
-                <p>🕒 Mon-Fri: 9AM-6PM</p>
+                <p>Dargah Bajar Ajmer, Rajasthan</p>
+                <p>devesh.dhanwani2005@gmail.com</p>
+                <p>+916350537767</p>
             </div>
         </div>
         
@@ -296,7 +295,6 @@ function initializeMobileMenu() {
     const mobileMenu = document.createElement('div');
     mobileMenu.className = 'mobile-menu';
     mobileMenu.id = 'mobileMenu';
-    
     mobileMenu.innerHTML = `
         <div class="mobile-menu-header">
             <div class="logo">
@@ -305,7 +303,6 @@ function initializeMobileMenu() {
             </div>
             <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
         </div>
-        
         <nav class="mobile-nav">
             <ul>
                 <li><a href="landing.html">Home</a></li>
@@ -317,15 +314,12 @@ function initializeMobileMenu() {
             </ul>
         </nav>
     `;
-    
     document.body.appendChild(mobileMenu);
 }
-
 // Toggle mobile menu
 function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
     const body = document.body;
-    
     if (isMobileMenuOpen) {
         mobileMenu.classList.remove('show');
         body.style.overflow = 'auto';
@@ -333,38 +327,121 @@ function toggleMobileMenu() {
         mobileMenu.classList.add('show');
         body.style.overflow = 'hidden';
     }
-    
     isMobileMenuOpen = !isMobileMenuOpen;
 }
-
 // Toggle user menu
 function toggleUserMenu() {
-    // Implementation for user menu dropdown
-    // showToast('User menu functionality coming soon!', 'info');
+if (!document.getElementById('settingsSection')) {
+    const div = document.createElement('div');
+    div.id = 'settingsSection';
+    div.className = 'settings hidden';
+    div.innerHTML = `
+        <div class="settings-box">
+        <div class="settings-header">
+        <h3>⚙️ USER Profile and Settings</h3>
+        <button onclick="closesetting()">✕</button>
+        </div>
+        <div class="settings-tabs">
+            <button class="settings-tab-btn active" onclick="showSetting('account', this)">👤 Account</button>
+            <button class="settings-tab-btn" onclick="showSetting('security', this)">🔐 Security</button>
+            <button class="settings-tab-btn" onclick="showSetting('appearance', this)">🌙 Appearance</button>
+        </div>
+        <div class="settings-content">
+            <div id="account" class="setting-panel">
+            <h4 class="panel-title">👤 Account Settings</h4>
+            <div class="settings-options">
+                <button class="settings-action-btn" onclick="editName()">
+                <span class="btn-icon">✏️</span>
+                <span class="btn-text">
+                    <span class="btn-title">Change Name</span>
+                    <span class="btn-subtitle">Update your display name</span>
+                </span>
+                </button>
+                <button class="settings-action-btn" onclick="editEmail()">
+                <span class="btn-icon">📧</span>
+                <span class="btn-text">
+                    <span class="btn-title">Change Email</span>
+                    <span class="btn-subtitle">Update your email address</span>
+                </span>
+                </button>
+            </div>
+            </div>
+            <div id="security" class="setting-panel hidden">
+            <h4 class="panel-title">🔐 Security Settings</h4>
+            <div class="settings-options">
+                <button class="settings-action-btn" onclick="changePassword()">
+                <span class="btn-icon">🔑</span>
+                <span class="btn-text">
+                    <span class="btn-title">Change Password</span>
+                    <span class="btn-subtitle">Update your password for better security</span>
+                </span>
+                </button>
+                <button class="settings-action-btn" onclick="twoFactor()">
+                <span class="btn-icon">🛡️</span>
+                <span class="btn-text">
+                    <span class="btn-title">Two-Factor Authentication</span>
+                    <span class="btn-subtitle">Enable 2FA for enhanced security</span>
+                </span>
+                </button>
+            </div>
+            </div>
+            <div id="appearance" class="setting-panel hidden">
+            <h4 class="panel-title">🌙 Appearance Settings</h4>
+            <div class="settings-options">
+                <button class="settings-action-btn" onclick="toggleDarkMode()">
+                <span class="btn-icon">🌙</span>
+                <span class="btn-text">
+                    <span class="btn-title">Toggle Dark Mode</span>
+                    <span class="btn-subtitle">Switch between light and dark theme</span>
+                </span>
+                </button>
+                <button class="settings-action-btn" onclick="changeTheme()">
+                <span class="btn-icon">🎨</span>
+                <span class="btn-text">
+                    <span class="btn-title">Change Theme Color</span>
+                    <span class="btn-subtitle">Personalize your interface colors</span>
+                </span>
+                </button>
+            </div>
+            </div>
+        </div>
+        </div>
+    `;
+
+    document.body.appendChild(div);
+}
+
+  // ✅ Always open after creation
+createsetting();
 }
 
 // Check user session
 function checkUserSession() {
-    const userSession = sessionStorage.getItem('currentUser');
-    if (userSession) {
-        try {
-            currentUser = JSON.parse(userSession);
-            updateUserInterface();
-        } catch (error) {
-            console.error('Error parsing user session:', error);
-            logout();
-        }
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        // ✅ User is logged in
+        updateUserInterfaceJWT();
     } else {
-        // Check if we're on a protected page
+        // ❌ Not logged in → protect pages
         const protectedPages = ['user.html', 'admin.html'];
         const currentPage = getCurrentPage();
-        
+
         if (protectedPages.includes(currentPage)) {
             showToast('Please login to access this page', 'warning');
             setTimeout(() => {
                 window.location.href = 'login.html';
-            }, 2000);
+            }, 1500);
         }
+    }
+}
+
+function updateUserInterfaceJWT() {
+    const userNameElement = document.querySelector('.user-name');
+
+    if (userNameElement) {
+        const username = localStorage.getItem("username");
+        userNameElement.textContent = username || "User";
     }
 }
 
@@ -386,17 +463,14 @@ function updateUserInterface() {
 
 // Logout function
 function logout() {
-    // Clear session
-    sessionStorage.removeItem('currentUser');
-    localStorage.removeItem('rememberUsername');
-    
-    // Show logout message
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+
     showToast('Logged out successfully', 'success');
-    
-    // Redirect to login page
+
     setTimeout(() => {
         window.location.href = 'login.html';
-    }, 1500);
+    }, 1000);
 }
 
 // Show toast notification

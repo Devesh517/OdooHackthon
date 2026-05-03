@@ -33,7 +33,6 @@
       
       <button class="slider-arrow prev" onclick="changeSlide(-1)">‹</button>
       <button class="slider-arrow next" onclick="changeSlide(1)">›</button>
-      
       <div class="slider-nav">
         <span class="dot active" onclick="showSlide(0)"></span>
         <span class="dot" onclick="showSlide(1)"></span>
@@ -44,27 +43,27 @@
     <div class="section-title">Categories</div>
     <div class="categories" id="categories">
       <div class="category" onclick="selectCategory('mens')">
-        <span class="category-icon">👔</span>
+        <span class="category-icon"><img src="../Images/menicon.jpg" alt="" ></span>
         <div class="category-name">Men's Wear</div>
       </div>
       <div class="category" onclick="selectCategory('womens')">
-        <span class="category-icon">👗</span>
+        <span class="category-icon"><img src="../Images/womenwearicon.png" alt=""></span>
         <div class="category-name">Women's Wear</div>
       </div>
       <div class="category" onclick="selectCategory('kids')">
-        <span class="category-icon">👶</span>
+        <span class="category-icon"><img src="../Images/kidswear2.png" alt=""></span>
         <div class="category-name">Kids</div>
       </div>
       <div class="category" onclick="selectCategory('accessories')">
-        <span class="category-icon">👜</span>
+        <span class="category-icon"><img src="../Images/accessories.png" alt=""></span>
         <div class="category-name">Accessories</div>
       </div>
       <div class="category" onclick="selectCategory('winter')">
-        <span class="category-icon">❄️</span>
+        <span class="category-icon"><img src="../Images/winterwear.png" alt=""></span>
         <div class="category-name">Winter</div>
       </div>
       <div class="category" onclick="selectCategory('summer')">
-        <span class="category-icon">☀️</span>
+        <span class="category-icon"><img src="../Images/summerwearicon.png" alt=""></span>
         <div class="category-name">Summer</div>
       </div>
     </div>
@@ -96,6 +95,11 @@
     </div>
   </div>
 
+  <div class="load-more-section">
+    <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreProducts()">
+      Load More Products
+    </button>
+  </div>
   <script src="../JS/common.js"></script>
   <script src="../JS/landing.js"></script>
 </body>
