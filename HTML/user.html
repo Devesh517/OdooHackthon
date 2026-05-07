@@ -32,28 +32,33 @@
       </div>
     </div>
 
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">👕</div>
-        <div class="stat-number">12</div>
-        <div class="stat-label">Items Listed</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🔄</div>
-        <div class="stat-number">8</div>
-        <div class="stat-label">Successful Trades</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">⭐</div>
-        <div class="stat-number">4.8</div>
-        <div class="stat-label">Average Rating</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🏆</div>
-        <div class="stat-number">Gold</div>
-        <div class="stat-label">Member Level</div>
-      </div>
-    </div>
+<div class="stats-grid">
+
+  <div class="stat-card">
+    <div class="stat-icon">👕</div>
+    <div class="stat-number" id="itemsListedCount">0</div>
+    <div class="stat-label">Items Listed</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">🔄</div>
+    <div class="stat-number" id="tradedCount">0</div>
+    <div class="stat-label">Successful Trades</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">⭐</div>
+    <div class="stat-number" id="ratingCount">0</div>
+    <div class="stat-label">Average Rating</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">🏆</div>
+    <div class="stat-number" id="memberLevel">Bronze</div>
+    <div class="stat-label">Member Level</div>
+  </div>
+
+</div>
 
     <div class="section">
       <div class="section-header">

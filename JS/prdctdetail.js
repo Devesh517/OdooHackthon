@@ -429,96 +429,45 @@ function validateForm(data) {
 }
 
 // Submit product
-function submitProduct(data) {
-  console.log('submitProduct called with data:', data);
-  
-  const submitBtn = document.getElementById('submitBtn');
-  const previewImage = document.getElementById('previewImage');
-  const form = document.getElementById('productForm');
-  
-  if (!submitBtn) {
-    console.error('Submit button not found');
-    showToast('Error: Submit button not found', 'error');
-    return;
-  }
-  
-  if (!previewImage) {
-    console.error('Preview image element not found');
-    showToast('Error: Image element not found', 'error');
-    return;
-  }
-  
-  if (!form) {
-    console.error('Form element not found');
-    showToast('Error: Form element not found', 'error');
-    return;
-  }
-  
-  const imageSrc = previewImage.src;
-  console.log('Image preview src:', imageSrc);
-  
-  if (!imageSrc || imageSrc === '') {
-    console.warn('No image uploaded, using default');
-    showToast('Warning: No image uploaded. Using default.', 'warning');
-  }
-  
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Submitting...';
-  
-  // Simulate API call
-  setTimeout(() => {
-    try {
-      // Create new listing object
-      const newListing = {
-        id: Date.now(), // Use timestamp as unique ID
+async function submitProduct(data) {
+
+    const token = localStorage.getItem("token");
+
+    const listingData = {
         title: data.name,
-        image: imageSrc || '../Images/icon.png',
-        size: data.size,
-        condition: data.condition,
-        points: parseInt(data.points),
-        status: 'Active',
         category: data.category,
-        dateListed: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
-        description: data.description
-      };
-      
-      console.log('Creating new listing:', newListing);
-      
-      // Get existing listings from localStorage
-      let savedListings = JSON.parse(localStorage.getItem('userListings')) || [];
-      console.log('Existing listings count:', savedListings.length);
-      
-      // Add new listing
-      savedListings.push(newListing);
-      console.log('New listings count:', savedListings.length);
-      
-      // Save back to localStorage
-      localStorage.setItem('userListings', JSON.stringify(savedListings));
-      console.log('Saved to localStorage successfully');
-      
-      showToast('Product submitted successfully!', 'success');
-      
-      // Reset form
-      form.reset();
-      previewImage.style.display = 'none';
-      document.getElementById('uploadIcon').style.display = 'block';
-      document.getElementById('uploadText').textContent = 'Click to upload image';
-      
-      console.log('Redirecting to user dashboard in 2 seconds...');
-      
-      // Redirect to user dashboard
-      setTimeout(() => {
-        console.log('Redirecting now');
-        window.location.href = 'user.html';
-      }, 2000);
-      
+        size: data.size,
+        conditionType: data.condition,
+        points: parseInt(data.points),
+        description: data.description,
+        imageUrl: document.getElementById("previewImage").src
+    };
+
+    try {
+
+        const response = await fetch("http://localhost:8080/api/listings/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(listingData)
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to save listing");
+        }
+
+        showToast("Listing added successfully!", "success");
+
+        setTimeout(() => {
+            window.location.href = "user.html";
+        }, 1500);
+
     } catch (error) {
-      console.error('Error during submission:', error);
-      showToast('Error: ' + error.message, 'error');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Listing';
+        console.error(error);
+        showToast("Error saving listing", "error");
     }
-  }, 1000);
 }
 
 // Trigger file upload
