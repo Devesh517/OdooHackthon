@@ -35,7 +35,7 @@ function addHeader() {
     
     const currentPage = getCurrentPage();
     const isAuthPage = ['login.html', 'newusr.html'].includes(currentPage);
-    
+    const isAdminPage = currentPage === 'admin.html';
     if (isAuthPage) {
         // Simple header for auth pages
         header.innerHTML = `
@@ -47,35 +47,149 @@ function addHeader() {
             </div>
         `;
     } else {
-        // Full header with navigation
+
+    // =========================
+    // ADMIN HEADER
+    // =========================
+
+    if (isAdminPage) {
+
         header.innerHTML = `
             <div class="header-content">
+
+                <a href="admin.html" class="logo">
+                    <img src="../Images/icon.png"
+                            alt="ReWear"
+                            class="logo-icon">
+
+                    <span>ReWear Admin</span>
+                </a>
+
+                <div class="user-menu">
+
+                    <div class="user-profile">
+                        <img src="../Images/user.png"
+                                alt="Profile"
+                                class="user-avatar">
+
+                        <span class="user-name">
+                            Admin
+                        </span>
+                    </div>
+
+                    <button class="logout-btn"
+                        onclick="logout()">
+
+                        Logout
+
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+    }
+
+    // =========================
+    // USER HEADER
+    // =========================
+
+    else {
+
+        header.innerHTML = `
+            <div class="header-content">
+
                 <a href="landing.html" class="logo">
-                    <img src="../Images/icon.png" alt="ReWear" class="logo-icon">
+                    <img src="../Images/icon.png"
+                            alt="ReWear"
+                            class="logo-icon">
+
                     <span>ReWear</span>
                 </a>
-                
+
                 <nav class="nav-menu">
                     <ul>
-                        <li><a href="landing.html" class="nav-link">Home</a></li>
-                        <li><a href="user.html" class="nav-link">Dashboard</a></li>
-                        <li><a href="product.html" class="nav-link">Products</a></li>
-                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li>
+                            <a href="landing.html"
+                               class="nav-link">
+
+                               Home
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="user.html"
+                               class="nav-link">
+
+                               Dashboard
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="product.html"
+                               class="nav-link">
+
+                               Products
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html"
+                               class="nav-link">
+
+                               Contact
+
+                            </a>
+                        </li>
                     </ul>
                 </nav>
-                
+
                 <div class="user-menu">
-                    <div class="user-profile" onclick="toggleUserMenu()">
-                        <img src="../Images/user.png" alt="Profile" class="user-avatar">
-                        <span class="user-name">Guest</span>
+
+                    <div class="user-profile"
+                        onclick="toggleUserMenu()">
+
+                        <img src="../Images/user.png"
+                             alt="Profile"
+                             class="user-avatar">
+
+                        <span class="user-name">
+                            Guest
+                        </span>
+
                     </div>
-                    <button class="setting-btn" onclick="btnsetting()">Setting</button>
-                    <button class="logout-btn" onclick="logout()">Logout</button>
+
+                    <button class="setting-btn"
+                        onclick="btnsetting()">
+
+                        Setting
+
+                    </button>
+
+                    <button class="logout-btn"
+                        onclick="logout()">
+
+                        Logout
+
+                    </button>
+
                 </div>
-                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+
+                <button class="mobile-menu-toggle"
+                    onclick="toggleMobileMenu()">
+
+                    ☰
+
+                </button>
+
             </div>
         `;
     }
+}
     
     // Insert header at the beginning of body
     document.body.insertBefore(header, document.body.firstChild);
@@ -435,14 +549,40 @@ function checkUserSession() {
         }
     }
 }
-
 function updateUserInterfaceJWT() {
-    const userNameElement = document.querySelector('.user-name');
 
-    if (userNameElement) {
-        const username = localStorage.getItem("username");
-        userNameElement.textContent = username || "User";
+    const currentPage = getCurrentPage();
+
+    const userNameElement =
+        document.querySelector('.user-name');
+
+    if (!userNameElement) return;
+
+    const username =
+        localStorage.getItem("username");
+
+    const role =
+        localStorage.getItem("role");
+
+    // =========================
+    // ADMIN PAGE
+    // =========================
+
+    if (currentPage === "admin.html") {
+        if (role === "ADMIN") {
+            userNameElement.textContent =
+                username || "Admin";
+        } else {
+            userNameElement.textContent =
+                "Unauthorized";
+        }
+        return;
     }
+    // =========================
+    // USER PAGE
+    // =========================
+    userNameElement.textContent =
+        username || "User";
 }
 
 // Update user interface based on current user
@@ -465,7 +605,7 @@ function updateUserInterface() {
 function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
-
+    localStorage.removeItem("role");
     showToast('Logged out successfully', 'success');
 
     setTimeout(() => {

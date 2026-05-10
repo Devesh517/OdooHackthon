@@ -375,7 +375,6 @@ function handleFormSubmit(e) {
     category: formData.get('category'),
     size: formData.get('size'),
     condition: formData.get('condition'),
-    points: formData.get('points'),
     description: formData.get('description')
   };
   
@@ -414,11 +413,6 @@ function validateForm(data) {
     return false;
   }
   
-  if (!data.points || data.points < 1) {
-    showToast('Please enter a valid points value', 'error');
-    return false;
-  }
-  
   if (!data.description || !data.description.trim()) {
     showToast('Please enter a description', 'error');
     return false;
@@ -438,7 +432,7 @@ async function submitProduct(data) {
         category: data.category,
         size: data.size,
         conditionType: data.condition,
-        points: parseInt(data.points),
+        points: 0,
         description: data.description,
         imageUrl: document.getElementById("previewImage").src
     };

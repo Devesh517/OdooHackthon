@@ -33,30 +33,34 @@ async function submitLogin() {
                 data = null;
             }
 
-        if (response.ok) {
-            // ✅ store JWT token
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("username", username);
-            showToast("Login successful!", "success");
-
-            setTimeout(() => {
-                window.location.href = "user.html";
-            }, 1000);
+if (response.ok) {
+    // ✅ Store JWT token
+    localStorage.setItem("token", data.token);
+    // ✅ Store username
+    localStorage.setItem("username", username);
+    // ✅ Store role
+    localStorage.setItem("role", data.role);
+    showToast("Login successful!", "success");
+    // ✅ Redirect based on role
+    setTimeout(() => {
+        if (data.role === "ADMIN") {
+            window.location.href = "admin.html";
 
         } else {
-            showToast("Invalid credentials", "error");
+            window.location.href = "user.html";
         }
-
+    }, 1000);
+} else {
+    showToast("Invalid credentials", "error");
+}
     } catch (error) {
-    console.error(error); 
+    console.error(error);
     showToast("Server error", "error");
 }
-
     loginButton.classList.remove('loading');
     loginButton.disabled = false;
     isSubmitting = false;
 }
-
  // Initialize form
 document.addEventListener('DOMContentLoaded', function() {
     setupFormValidation();
@@ -136,7 +140,6 @@ function validateUsername(value) {
             showFieldError('username', 'Username or email is required');
             return false;
         }
-
      // Check if it's an email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (emailRegex.test(value)) {
@@ -173,47 +176,43 @@ function validateUsername(value) {
     }
 
  // Field validation helper
- function validateField(input) {
-     const fieldName = input.name;
-     const value = input.value;
-     
-     switch (fieldName) {
-         case 'username':
-             validateUsername(value);
-             break;
-         case 'password':
-             validatePassword(value);
-             break;
-     }
- }
+    function validateField(input) {
+    const fieldName = input.name;
+    const value = input.value;
+    
+    switch (fieldName) {
+        case 'username':
+            validateUsername(value);
+            break;
+        case 'password':
+            validatePassword(value);
+            break;
+    }
+}
 
  // Show field error
- function showFieldError(fieldName, message) {
-     const group = document.getElementById(fieldName + 'Group');
-     const error = document.getElementById(fieldName + 'Error');
-     
-     group.classList.remove('success');
-     group.classList.add('error');
-     error.textContent = message;
-     error.style.display = 'block';
- }
-
+function showFieldError(fieldName, message) {
+    const group = document.getElementById(fieldName + 'Group');
+    const error = document.getElementById(fieldName + 'Error');
+    group.classList.remove('success');
+    group.classList.add('error');
+    error.textContent = message;
+    error.style.display = 'block';
+}
  // Show field success
- function showFieldSuccess(fieldName) {
-     const group = document.getElementById(fieldName + 'Group');
-     const error = document.getElementById(fieldName + 'Error');
-     
-     group.classList.remove('error');
-     group.classList.add('success');
-     error.style.display = 'none';
- }
-
+function showFieldSuccess(fieldName) {
+    const group = document.getElementById(fieldName + 'Group');
+    const error = document.getElementById(fieldName + 'Error');
+    
+    group.classList.remove('error');
+    group.classList.add('success');
+    error.style.display = 'none';
+}
  // Clear field error
 function clearFieldError(input) {
     const fieldName = input.name;
     const group = document.getElementById(fieldName + 'Group');
     const error = document.getElementById(fieldName + 'Error');
-
     if (group) group.classList.remove('error', 'success');
     if (error) error.style.display = 'none';
 }
@@ -222,7 +221,6 @@ function clearFieldError(input) {
     function togglePassword() {
         const input = document.getElementById('password');
         const button = document.querySelector('.password-toggle');
-
         if (input.type === 'password') {
             input.type = 'text';
             button.textContent = '🙈';
@@ -241,40 +239,38 @@ function clearFieldError(input) {
     }
 
  // Forgot password
- function forgotPassword() {
-     showToast('Password reset functionality would open here', 'success');
- }
-
+function forgotPassword() {
+    showToast('Password reset functionality would open here', 'success');
+}
  // Keyboard shortcuts
- document.addEventListener('keydown', (e) => {
-     if (e.ctrlKey && e.key === 'Enter') {
-         e.preventDefault();
-         form.dispatchEvent(new Event('submit'));
-     }
- });
-
+document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+            e.preventDefault();
+            form.dispatchEvent(new Event('submit'));
+    }
+});
  // Demo credentials helper
- function showDemoCredentials() {
-     showToast('Demo credentials: admin/admin123 or user/user123', 'success');
- }
+    function showDemoCredentials() {
+        showToast('Demo credentials: admin/admin123 or user/user123', 'success');
+}
 
  // Add demo credentials button (for development)
- setTimeout(() => {
-     const demoBtn = document.createElement('button');
-     demoBtn.textContent = 'Demo Credentials';
-     demoBtn.style.cssText = `
-         position: fixed;
-         bottom: 20px;
-         left: 20px;
-         background: rgba(52, 152, 219, 0.9);
-         color: white;
-         border: none;
-         padding: 10px 15px;
-         border-radius: 8px;
-         cursor: pointer;
-         font-size: 12px;
-         z-index: 1000;
-     `;
-     demoBtn.addEventListener('click', showDemoCredentials);
-     document.body.appendChild(demoBtn);
- }, 1000);
+setTimeout(() => {
+    const demoBtn = document.createElement('button');
+    demoBtn.textContent = 'Demo Credentials';
+    demoBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: rgba(52, 152, 219, 0.9);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 12px;
+        z-index: 1000;
+    `;
+    demoBtn.addEventListener('click', showDemoCredentials);
+    document.body.appendChild(demoBtn);
+}, 1000);

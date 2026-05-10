@@ -43,21 +43,26 @@ function addNewListing() {
     window.location.href = "prdctdetail.html";
 }
 function filterListings(type, btn) {
+
     document.querySelectorAll(".filter-btn")
         .forEach(b => b.classList.remove("active"));
+
     btn.classList.add("active");
+
     let filteredListings = [];
+
     if (type === "all") {
+
         filteredListings = allListings;
-    } else if (type === "active") {
+
+    } else {
+
         filteredListings = allListings.filter(
-            item => item.status === "ACTIVE"
-        );
-    } else if (type === "traded") {
-        filteredListings = allListings.filter(
-            item => item.status === "TRADED"
+            item =>
+                item.status.toUpperCase() === type.toUpperCase()
         );
     }
+
     renderListings(filteredListings);
 }
 async function loadUserListings() {
@@ -71,11 +76,14 @@ async function loadUserListings() {
         const listings = await response.json();
         allListings = listings;
         const totalListings = listings.length;
-        const tradedListings = listings.filter(
-            item => item.status === "TRADED"
+        const pendingListings = listings.filter(
+        item => item.status === "PENDING"
         ).length;
-        const activeListings = listings.filter(
-            item => item.status === "ACTIVE"
+        const approvedListings = listings.filter(
+        item => item.status === "APPROVED"
+        ).length;
+        const rejectedListings = listings.filter(
+        item => item.status === "REJECTED"
         ).length;
         const totalPoints = listings.reduce(
             (sum, item) => sum + (item.points || 0),
@@ -91,7 +99,7 @@ async function loadUserListings() {
         document.getElementById("itemsListedCount").innerText =
             totalListings;
         document.getElementById("tradedCount").innerText =
-            tradedListings;
+            approvedListings;
         document.getElementById("ratingCount").innerText =
             "5.0";
         document.getElementById("memberLevel").innerText =
@@ -99,9 +107,9 @@ async function loadUserListings() {
         document.getElementById("totalListings").innerText =
             totalListings;
         document.getElementById("activeListings").innerText =
-            activeListings;
+        approvedListings;
         document.getElementById("tradedListings").innerText =
-            tradedListings;
+        rejectedListings;
         document.getElementById("listingPoints").innerText =
             totalPoints;
         const container = document.getElementById("listingsContainer");
@@ -112,37 +120,79 @@ async function loadUserListings() {
     }
 }
 function renderListings(listings) {
-    const container = document.getElementById("listingsContainer");
+
+    const container =
+        document.getElementById("listingsContainer");
+
     container.innerHTML = "";
+
     if (listings.length === 0) {
+
         container.innerHTML = `
             <p class="no-listings">
                 No listings found
             </p>
         `;
+
         return;
     }
+
     listings.forEach(item => {
+
         const card = `
-            <div class="listing-card">
-                <div class="listing-image-wrapper">
-                    <img src="${item.imageUrl}" />
-                </div>
-                <div class="listing-info">
-                    <div class="listing-title">
-                        ${item.title}
-                    </div>
-                    <div class="listing-points">
-                        ${item.points} points
-                    </div>
-                    <div class="listing-actions">
-                        <button class="action-btn view-btn">
-                            View
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
+
+<div class="listing-card">
+
+    <div class="listing-image-wrapper">
+
+        <img src="${item.imageUrl}" />
+
+        <div class="listing-status-badge
+            status-${item.status.toLowerCase()}">
+
+            ${item.status}
+
+        </div>
+
+    </div>
+
+    <div class="listing-info">
+
+        <div class="listing-title">
+            ${item.title}
+        </div>
+
+        <div class="listing-meta">
+
+            <span class="meta-item">
+                ${item.category}
+            </span>
+
+            <span class="meta-item">
+                ${item.size}
+            </span>
+
+        </div>
+
+        <div class="listing-points">
+
+            ${item.points || 0} Points
+
+        </div>
+
+        <div class="listing-actions">
+
+            <button class="action-btn view-btn">
+                View
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+`;
+
         container.innerHTML += card;
     });
 }

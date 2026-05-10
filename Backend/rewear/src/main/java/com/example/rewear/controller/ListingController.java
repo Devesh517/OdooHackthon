@@ -34,13 +34,20 @@ public class ListingController {
                 .findByUsername(username)
                 .orElseThrow();
 
+        if (!user.getRole().equals("USER")) {
+
+            throw new RuntimeException(
+                    "Admins cannot create listings"
+            );
+        }
+
         Listing listing = new Listing();
 
         listing.setTitle(request.getTitle());
         listing.setCategory(request.getCategory());
         listing.setSize(request.getSize());
         listing.setConditionType(request.getConditionType());
-        listing.setPoints(request.getPoints());
+        listing.setPoints(0);
         listing.setDescription(request.getDescription());
         listing.setImageUrl(request.getImageUrl());
 
@@ -58,6 +65,13 @@ public class ListingController {
         User user = userRepository
                 .findByUsername(username)
                 .orElseThrow();
+
+        if (!user.getRole().equals("USER")) {
+
+            throw new RuntimeException(
+                    "Admins cannot access user listings"
+            );
+        }
 
         return listingRepository.findByUser(user);
     }

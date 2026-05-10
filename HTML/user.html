@@ -72,11 +72,11 @@
           <span class="stat-value" id="totalListings">0</span>
         </div>
         <div class="stat-box">
-          <span class="stat-label">Active</span>
+          <span class="stat-label">Approved</span>
           <span class="stat-value" id="activeListings">0</span>
         </div>
         <div class="stat-box">
-          <span class="stat-label">Traded</span>
+          <span class="stat-label">Pending</span>
           <span class="stat-value" id="tradedListings">0</span>
         </div>
         <div class="stat-box">
@@ -86,9 +86,10 @@
       </div>
 
       <div class="listings-filter">
-        <button class="filter-btn active" onclick="filterListings('all', this)">All</button>
-        <button class="filter-btn" onclick="filterListings('active', this)">Active</button>
-        <button class="filter-btn" onclick="filterListings('traded', this)">Traded</button>
+        <button class="filter-btn active"onclick="filterListings('all', this)">All</button>
+        <button class="filter-btn"onclick="filterListings('pending', this)">Pending</button>
+        <button class="filter-btn"onclick="filterListings('approved', this)">Approved</button>
+        <button class="filter-btn"onclick="filterListings('rejected', this)">Rejected</button>
       </div>
 
       <div id="listingsContainer">

@@ -532,6 +532,18 @@
     margin-bottom: 5px;
   }
 
+  .status-approved {
+    background-color: #27ae60;
+}
+
+.status-pending {
+    background-color: #f39c12;
+}
+
+.status-rejected {
+    background-color: #e74c3c;
+}
+
   .stat-label {
     color: #7f8c8d;
     font-size: 14px;

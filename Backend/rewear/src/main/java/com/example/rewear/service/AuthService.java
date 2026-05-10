@@ -39,16 +39,31 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest req) {
 
-        User user = repo.findByUsernameOrEmail(req.getUsername(), req.getUsername())
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        User user = repo.findByUsernameOrEmail(
+                req.getUsername(),
+                req.getUsername()
+        ).orElseThrow(() ->
+                new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "User not found"
+                ));
 
-        if (!encoder.matches(req.getPassword(), user.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
+        if (!encoder.matches(
+                req.getPassword(),
+                user.getPassword()
+        )) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "Invalid credentials"
+            );
         }
 
-        String token = jwtUtil.generateToken(user.getUsername());
+        String token =
+                jwtUtil.generateToken(user.getUsername());
 
-        return new AuthResponse(token);
+        String role = user.getRole();
+
+        return new AuthResponse(token, role);
     }
 }

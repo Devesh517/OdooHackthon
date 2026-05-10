@@ -31,7 +31,7 @@ public class Listing {
 
     private String imageUrl;
 
-    private String status = "ACTIVE";
+    private String status = "PENDING";
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
