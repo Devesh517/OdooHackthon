@@ -9,4 +9,8 @@ import java.util.List;
 public interface ListingRepository extends JpaRepository<Listing, Long> {
 
     List<Listing> findByUser(User user);
+    List<Listing> findByStatusAndUserNot(
+            String status,
+            User user
+    );
 }

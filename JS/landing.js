@@ -9,219 +9,50 @@
   let currentPage = 0;
   let productsPerPage = 6;
   
-  
+  let products = [];
+
+  let displayedProducts = [];
+
+  let filteredProducts = [];
 
  // Slider variables
- let currentSlide = 0;
- let slideInterval;
+let currentSlide = 0;
+let slideInterval;
 
-// Sample product data with subcategories
-const products = [
-  // Men's Wear - Shirts
-  {
-    id: 1,
-    name: 'Blue Denim Shirt',
-    image: '../Images/denim.jpg',
-    size: 'M',
-    condition: 'Good',
-    points: 50,
-    category: 'mens',
-    subcategory: 'shirts'
-  },
-  {
-    id: 2,
-    name: 'White Formal Shirt',
-    image: '../Images/whiteshirt.jpg',
-    size: 'L',
-    condition: 'Like New',
-    points: 45,
-    category: 'mens',
-    subcategory: 'shirts'
-  },
-  // Men's Wear - Pants
-  {
-    id: 3,
-    name: 'Black Jeans',
-    image: '../Images/blackjeans.jpg',
-    size: '32',
-    condition: 'Used',
-    points: 35,
-    category: 'mens',
-    subcategory: 'pants'
-  },
-  {
-    id: 4,
-    name: 'Khaki Chinos',
-    image: '../Images/khakichinos.jpg',
-    size: '34',
-    condition: 'Good',
-    points: 40,
-    category: 'mens',
-    subcategory: 'pants'
-  },
-  // Women's Wear - Dresses
-  {
-    id: 5,
-    name: 'Summer Dress',
-    image: '../Images/summerdress.jpg',
-    size: 'S',
-    condition: 'Good',
-    points: 45,
-    category: 'womens',
-    subcategory: 'dresses'
-  },
-  {
-    id: 6,
-    name: 'Floral Kurti',
-    image: '../Images/floralkurti.jpg',
-    size: 'L',
-    condition: 'Like New',
-    points: 40,
-    category: 'womens',
-    subcategory: 'dresses'
-  },
-  // Women's Wear - Tops
-  {
-    id: 7,
-    name: 'Silk Blouse',
-    image: '../Images/silkblouse.jpg',
-    size: 'M',
-    condition: 'Excellent',
-    points: 55,
-    category: 'womens',
-    subcategory: 'tops'
-  },
-  {
-    id: 8,
-    name: 'Cotton Top',
-    image: '../Images/cottontop.jpg',
-    size: 'S',
-    condition: 'Good',
-    points: 30,
-    category: 'womens',
-    subcategory: 'tops'
-  },
-  // Kids - Boys
-  {
-    id: 9,
-    name: 'Kids T-Shirt',
-    image: '../Images/kidstshirt.jpg',
-    size: 'S',
-    condition: 'Good',
-    points: 20,
-    category: 'kids',
-    subcategory: 'boys'
-  },
-  // Kids - Girls
-  {
-    id: 10,
-    name: 'Princess Dress',
-    image: '../Images/princessdress.jpg',
-    size: 'XS',
-    condition: 'Like New',
-    points: 35,
-    category: 'kids',
-    subcategory: 'girls'
-  },
-  // Accessories - Bags
-  {
-    id: 11,
-    name: 'Leather Handbag',
-    image: '../Images/leatherbag.jpg',
-    size: 'One Size',
-    condition: 'Good',
-    points: 80,
-    category: 'accessories',
-    subcategory: 'bags'
-  },
-  // Accessories - Jewelry
-  {
-    id: 12,
-    name: 'Silver Necklace',
-    image: '../Images/silverneclace.jpg',
-    size: 'One Size',
-    condition: 'Excellent',
-    points: 60,
-    category: 'accessories',
-    subcategory: 'jewelry'
-  },
-  // Winter - Jackets
-  {
-    id: 13,
-    name: 'Winter Hoodie',
-    image: '../Images/winterhoddie.jpg',
-    size: 'XL',
-    condition: 'Excellent',
-    points: 60,
-    category: 'winter',
-    subcategory: 'jackets'
-  },
-  {
-    id: 14,
-    name: 'Wool Jacket',
-    image: '../Images/wooljacket.jpg',
-    size: 'L',
-    condition: 'Good',
-    points: 70,
-    category: 'winter',
-    subcategory: 'jackets'
-  },
-  // Winter - Sweaters
-  {
-    id: 15,
-    name: 'Knit Sweater',
-    image: '../Images/knittedsweater.jpg',
-    size: 'M',
-    condition: 'Like New',
-    points: 50,
-    category: 'winter',
-    subcategory: 'sweaters'
-  },
-  // Summer - Shorts
-  {
-    id: 16,
-    name: 'Denim Shorts',
-    image: '../Images/denimshorts.jpg',
-    size: '32',
-    condition: 'Good',
-    points: 35,
-    category: 'summer',
-    subcategory: 'shorts'
-  },
-  // Summer - T-Shirts
-  {
-    id: 17,
-    name: 'Casual T-Shirt',
-    image: '../Images/casualt-shirt.jpg',
-    size: 'M',
-    condition: 'Like New',
-    points: 30,
-    category: 'summer',
-    subcategory: 'tshirts'
-  },
-  {
-    id: 18,
-    name: 'Graphic T-Shirt',
-    image: '../Images/graphict-shirt.jpg',
-    size: 'L',
-    condition: 'Good',
-    points: 25,
-    category: 'summer',
-    subcategory: 'tshirts'
-  }
-];
-let displayedProducts = [...products];
-let filteredProducts = [...products];
 let currentCategory = 'all';
 let currentSubcategory = 'all';
 
  // Initialize the page
   document.addEventListener('DOMContentLoaded', function() {
-  renderProducts();
+    loadMarketplaceProducts();
     startAutoSlide();
     setupEventListeners();
-  });
-
+});
+  async function loadMarketplaceProducts() {
+    try {
+        const token =
+            localStorage.getItem("token");
+        const response = await fetch(
+            "http://localhost:8080/api/listings/feed",
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        if (!response.ok) {
+            throw new Error("Failed to load products");
+        }
+        const data = await response.json();
+        // Store globally
+        products = data;
+        displayedProducts = [...products];
+        filteredProducts = [...products];
+        renderProducts();
+    } catch(error) {
+        console.error(error);
+    }
+}
  // Setup event listeners
   function setupEventListeners() {
    // Keyboard navigation for slider
@@ -232,15 +63,12 @@ let currentSubcategory = 'all';
         changeSlide(1);
       }
     });
-
    // Touch/swipe support for slider
   let startX = 0;
   let endX = 0;
-
   slider.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
   });
-
     slider.addEventListener('touchend', (e) => {
       endX = e.changedTouches[0].clientX;
       handleSwipe();
@@ -249,7 +77,6 @@ let currentSubcategory = 'all';
     function handleSwipe() {
       const swipeThreshold = 50;
       const diff = startX - endX;
-
       if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0) {
          changeSlide(1); // Swipe left
@@ -266,11 +93,9 @@ let currentSubcategory = 'all';
       slide.classList.remove('active');
       dots[i].classList.remove('active');
     });
-  
   slides[index].classList.add('active');
   dots[index].classList.add('active');
   currentSlide = index;
-
    // Update slides transform
   const slidesContainer = document.getElementById('slides');
    slidesContainer.style.transform = `translateX(-${index * 33.333}%)`;
@@ -348,58 +173,91 @@ const categoryData = {
 function selectCategory(category) {
   currentCategory = category;
   currentSubcategory = 'all';
-  
   // Hide main categories and show selected category section
   document.getElementById('categories').style.display = 'none';
   document.getElementById('selectedCategorySection').style.display = 'block';
-  
   // Update category title
   document.getElementById('selectedCategoryTitle').textContent = categoryData[category].name;
-  
   // Populate subcategories
   populateSubcategories(category);
-  
   // Show all products for this category
   filteredProducts = products.filter(product => product.category === category);
   populateCategoryProducts();
-  
   // Scroll to the new section
   document.getElementById('selectedCategorySection').scrollIntoView({
     behavior: 'smooth',
     block: 'start'
   });
-  
   showToast(`Showing ${categoryData[category].name}`, 'success');
 }
 
-function populateSubcategories(category) {
-  const subcategoriesGrid = document.getElementById('subcategoriesGrid');
-  const subcategories = categoryData[category].subcategories;
-  
-  subcategoriesGrid.innerHTML = subcategories.map(sub => `
-    <div class="subcategory-card" onclick="selectSubcategory('${category}', '${sub.id}')">
-      <img src="${sub.icon}" class="subcategory-icon" alt="${sub.name}"
-            onerror="this.src='../Images/icon.png'">
-      <div class="subcategory-name">${sub.name}</div>
-    </div>
-  `).join('');
+function populateCategoryProducts() {
+    const categoryProducts =
+        document.getElementById('categoryProducts');
+    if (filteredProducts.length === 0) {
+        categoryProducts.innerHTML = `
+            <div style="
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: 40px;
+                color: #7f8c8d;
+            ">
+                <div style="
+                    font-size: 48px;
+                    margin-bottom: 15px;
+                ">
+                    🔍
+                </div>
+                <div style="font-size: 18px;">
+                    No products found
+                </div>
+            </div>
+        `;
+        return;
+    }
+    categoryProducts.innerHTML =
+        filteredProducts.map(product => `
+        <div class="product"
+              onclick="viewProduct(${product.id})">
+
+            <img src="${product.imageUrl}"
+                  alt="${product.title}"
+                  class="product-image"
+                  onerror="this.src='../Images/icon.png'">
+            <div class="product-title">
+                ${product.title}
+            </div>
+            <div class="product-details">
+                Size: ${product.size}
+            </div>
+            <div class="product-details">
+                Condition: ${product.conditionType}
+            </div>
+            <div class="product-details">
+                Category: ${product.category}
+            </div>
+            <div class="product-points">
+                ${product.points} Points
+            </div>
+            <button class="view-btn">
+                View Details
+            </button>
+        </div>
+    `).join('');
 }
 
 // Select subcategory
 function selectSubcategory(category, subcategory) {
   currentSubcategory = subcategory;
-  
   // Update active subcategory
   document.querySelectorAll('.subcategory-card').forEach(card => {
     card.classList.remove('active');
   });
   event.target.closest('.subcategory-card').classList.add('active');
-  
   // Filter products by subcategory
   filteredProducts = products.filter(product =>
-    product.category === category && product.subcategory === subcategory
-  );
-  
+    product.category === category
+);
   populateCategoryProducts();
   showToast(`Showing ${categoryData[category].name} - ${subcategory}`, 'success');
 }
@@ -407,7 +265,6 @@ function selectSubcategory(category, subcategory) {
 // Populate products in category section
 function populateCategoryProducts() {
   const categoryProducts = document.getElementById('categoryProducts');
-  
   if (filteredProducts.length === 0) {
     categoryProducts.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #7f8c8d;">
@@ -418,7 +275,6 @@ function populateCategoryProducts() {
     `;
     return;
   }
-
   categoryProducts.innerHTML = filteredProducts.map(product => `
     <div class="product" onclick="viewProduct(${product.id})">
       <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='../Images/icon.png'">
@@ -434,60 +290,84 @@ function populateCategoryProducts() {
 function goBackToAllCategories() {
   currentCategory = 'all';
   currentSubcategory = 'all';
-  
   // Show main categories and hide selected category section
   document.getElementById('categories').style.display = 'grid';
   document.getElementById('selectedCategorySection').style.display = 'none';
-  
   // Reset to show all products
   filteredProducts = [...products];
   renderProducts();
-  
   // Scroll to categories
   document.getElementById('categories').scrollIntoView({ 
     behavior: 'smooth',
     block: 'start'
   });
-  
   showToast('Showing all categories', 'success');
 }
 
  // Populate product
-
 function renderProducts(append = false) {
-  const grid = document.getElementById('products');
+    const grid = document.getElementById('products');
+    const startIndex = currentPage * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    const productsToShow =
+        displayedProducts.slice(startIndex, endIndex);
+    // Clear old products
+    if (!append) {
+        grid.innerHTML = '';
+    }
+    // No products found
+    if (productsToShow.length === 0) {
+        grid.innerHTML = `
+            <div class="no-products">
+                <h3>No Products Found</h3>
+                <p>
+                    No approved products available right now.
+                </p>
+            </div>
+        `;
+        return;
+    }
+    // Render products
+    productsToShow.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product';
+        card.innerHTML = `
+            <img src="${product.imageUrl}"
+                  class="product-image"
+                  alt="${product.title}"
+                  onerror="this.src='../Images/icon.png'"
+                  onclick="viewProduct(${product.id})">
+            <div class="product-title">
+                ${product.title}
+            </div>
+            <div class="product-details">
+                Size: ${product.size}
+            </div>
+            <div class="product-details">
+                Condition: ${product.conditionType}
+            </div>
+            <div class="product-details">
+                Category: ${product.category}
+            </div>
+            <div class="product-points">
+                ${product.points} Points
+            </div>
+            <button class="view-btn"
+                onclick="viewProduct(${product.id})">
+                View Details
+            </button>
+        `;
+        grid.appendChild(card);
+    });
 
-  const startIndex = currentPage * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-
-  const productsToShow = displayedProducts.slice(startIndex, endIndex);
-
-  if (!append) {
-    grid.innerHTML = '';
-  }
-
-  productsToShow.forEach(product => {
-    const card = document.createElement('div');
-    card.className = 'product';
-    card.innerHTML = `
-  <img src="${product.image}" class="product-image"
-      onclick="viewProduct(${product.id})">
-
-  <div class="product-title">${product.name}</div>
-  <div class="product-details">Size: ${product.size}</div>
-  <div class="product-points">${product.points}</div>
-
-  <button class="view-btn" onclick="viewProduct(${product.id})">
-    View Details
-  </button>
-`;
-    grid.appendChild(card);
-  });
-
-  // Hide button if no more products
-  if (endIndex >= displayedProducts.length) {
-    document.getElementById('loadMoreBtn').style.display = 'none';
-  }
+    // Load More Button Logic
+    const loadMoreBtn =
+        document.getElementById('loadMoreBtn');
+    if (endIndex >= displayedProducts.length) {
+        loadMoreBtn.style.display = 'none';
+    } else {
+        loadMoreBtn.style.display = 'block';
+    }
 }
 function loadMoreProducts() {
   currentPage++;
@@ -497,18 +377,16 @@ function loadMoreProducts() {
   function viewProduct(productId) {
     const product = products.find(p => p.id === productId);
     if (product) {
-      showToast(`Opening ${product.name}...`, 'success');
+      showToast(`Opening ${product.title}...`, 'success');
      // Here you would typically navigate to a product detail page
       setTimeout(() => {
         window.location.href = `prdctdetail.html?id=${productId}`;
       }, 1000);
     }
   }
-
  // Pause auto-slide when hovering over slider
   slider.addEventListener('mouseenter', stopAutoSlide);
   slider.addEventListener('mouseleave', startAutoSlide);
-
  // Add loading simulation
   function simulateLoading() {
   loading.style.display = 'block';

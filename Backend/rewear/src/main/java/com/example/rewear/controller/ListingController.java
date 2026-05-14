@@ -75,4 +75,20 @@ public class ListingController {
 
         return listingRepository.findByUser(user);
     }
+    @GetMapping("/feed")
+    public List<Listing> getMarketplaceFeed(
+            Authentication authentication
+    ) {
+
+        String username = authentication.getName();
+
+        User currentUser = userRepository
+                .findByUsername(username)
+                .orElseThrow();
+
+        return listingRepository.findByStatusAndUserNot(
+                "APPROVED",
+                currentUser
+        );
+    }
 }
